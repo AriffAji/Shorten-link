@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pemendek Tautan</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://res.cloudinary.com/dvul7dq3b/image/upload/v1770688661/logo_1_hhnqy2.png"
+    />
+    <style>
+      :root {
+        --hijau: #205a28;
+        --hijau-gelap: #163f1c;
+        --hijau-muda: #e8f1e9;
+        --merah: #c72b32;
+        --merah-muda: #fdecec;
+        --teks: #1f2937;
+        --teks-lembut: #6b7280;
+        --garis: #e5e7eb;
+        --latar: #f3f5f3;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: var(--latar);
+        color: var(--teks);
+        font-size: 14px;
+      }
+      header {
+        background: linear-gradient(180deg, var(--hijau), var(--hijau-gelap));
+        height: 190px;
+        color: #fff;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 0 10px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      .brand-logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--hijau);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        padding: 4px;
+        flex-shrink: 0;
+      }
+      .brand-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .navbar nav span {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+      main {
+        max-width: 760px;
+        margin: -120px auto 40px;
+        padding: 0 16px;
+      }
+      .kartu {
+        background: #fff;
+        border-radius: 14px;
+        padding: 22px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+      }
+      .judul {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .ikon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--hijau-muda);
+        color: var(--hijau);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .judul h1 {
+        margin: 0;
+        font-size: 17px;
+      }
+      .judul p {
+        margin: 2px 0 0;
+        color: var(--teks-lembut);
+        font-size: 13px;
+      }
+      .baris {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      input {
+        font: inherit;
+        font-size: 14px;
+        padding: 11px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 999px;
+        outline: none;
+        background: #fff;
+        color: var(--teks);
+      }
+      input:focus {
+        border-color: var(--hijau);
+        box-shadow: 0 0 0 3px rgba(32, 90, 40, 0.15);
+      }
+      .input-url {
+        flex: 1;
+        min-width: 220px;
+      }
+      .prefix {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 220px;
+        border: 1px solid #d1d5db;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .prefix span {
+        padding: 11px 0 11px 14px;
+        color: var(--teks-lembut);
+        white-space: nowrap;
+      }
+      .prefix input {
+        border: 0;
+        border-radius: 0;
+        flex: 1;
+        min-width: 0;
+        padding-left: 2px;
+        box-shadow: none;
+      }
+      .prefix:focus-within {
+        border-color: var(--hijau);
+        box-shadow: 0 0 0 3px rgba(32, 90, 40, 0.15);
+      }
+      .tombol {
+        padding: 11px 22px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--hijau);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .tombol:hover {
+        background: var(--hijau-gelap);
+      }
+      .petunjuk {
+        font-size: 12px;
+        color: var(--teks-lembut);
+        margin: 8px 0 0 14px;
+      }
+      .pesan {
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        margin-top: 14px;
+      }
+      .gagal {
+        background: var(--merah-muda);
+        color: #9b1c22;
+      }
+      h2 {
+        font-size: 15px;
+        margin: 0 0 14px;
+      }
+      .item {
+        border: 1px solid var(--garis);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+      }
+      .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--teks-lembut);
+        margin-top: 8px;
+      }
+      .label:first-child {
+        margin-top: 0;
+      }
+      .isi {
+        font-size: 14px;
+        word-break: break-all;
+        margin-top: 3px;
+      }
+      .pendek-baris {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 3px;
+      }
+      .pendek {
+        font-weight: 600;
+        color: var(--hijau);
+        text-decoration: none;
+        word-break: break-all;
+      }
+      .pendek:hover {
+        text-decoration: underline;
+      }
+      .ikon-salin {
+        border: 0;
+        background: transparent;
+        color: var(--teks-lembut);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 6px;
+        display: flex;
+      }
+      .ikon-salin:hover {
+        background: var(--hijau-muda);
+        color: var(--hijau);
+      }
+
+      /* Baris bawah: info di kiri, tombol aksi rata di kanan */
+      .bawah {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--garis);
+        gap: 8px 12px;
+        flex-wrap: wrap;
+        font-size: 12px;
+        color: var(--teks-lembut);
+      }
+      .aksi {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+      }
+      .aksi form {
+        margin: 0;
+        display: flex;
+      }
+      .btn {
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.2;
+        min-width: 72px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--hijau);
+        background: #fff;
+        color: var(--hijau);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .btn:hover {
+        background: var(--hijau-muda);
+      }
+      .btn-merah {
+        border-color: var(--merah);
+        color: var(--merah);
+      }
+      .btn-merah:hover {
+        background: var(--merah-muda);
+      }
+      .form-ganti {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 12px;
+        background: #f9fafb;
+        border-radius: 10px;
+      }
+      .form-ganti[hidden] {
+        display: none;
+      }
+      .form-ganti label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--teks-lembut);
+      }
+      .form-ganti .prefix {
+        flex: none;
+      }
+      .form-ganti input {
+        width: 100%;
+        padding: 9px 14px;
+      }
+      .form-ganti .prefix input {
+        width: auto;
+      }
+      .form-ganti .btn {
+        justify-self: end;
+        padding: 8px 18px;
+      }
+      .kosong {
+        color: var(--teks-lembut);
+        text-align: center;
+        padding: 20px 0;
+      }
+      .footer {
+        text-align: center;
+        color: var(--teks-lembut);
+        font-size: 12px;
+        padding: 10px 0 30px;
+      }
+
+      /* Toast: kartu putih dengan aksen warna, supaya kontras di atas header hijau */
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        max-width: 360px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 40px 14px 14px;
+        background: #fff;
+        color: var(--teks);
+        border: 1px solid var(--garis);
+        border-left: 5px solid var(--hijau);
+        border-radius: 10px;
+        font-size: 13px;
+        line-height: 1.45;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        z-index: 50;
+        animation: masuk 0.3s ease;
+      }
+      .toast.hapus {
+        border-left-color: var(--merah);
+      }
+      .toast-ikon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background: var(--hijau-muda);
+        color: var(--hijau);
+      }
+      .toast.hapus .toast-ikon {
+        background: var(--merah-muda);
+        color: var(--merah);
+      }
+      .toast-teks {
+        padding-top: 4px;
+        word-break: break-word;
+      }
+      .toast.keluar {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s;
+      }
+      .toast-x {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        background: none;
+        border: 0;
+        color: var(--teks-lembut);
+        font-size: 20px;
+        cursor: pointer;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 6px;
+      }
+      .toast-x:hover {
+        background: var(--latar);
+        color: var(--teks);
+      }
+      @keyframes masuk {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .toast {
+          left: 16px;
+          right: 16px;
+          max-width: none;
+        }
+      }
+
+      /* Dialog konfirmasi */
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(15, 23, 20, 0.55);
+        backdrop-filter: blur(2px);
+        animation: fade 0.15s ease;
+      }
+      .modal[hidden] {
+        display: none;
+      }
+      .modal-kotak {
+        width: 100%;
+        max-width: 380px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 26px 24px 20px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        animation: naik 0.2s ease;
+      }
+      .modal-logo {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 14px;
+        border-radius: 50%;
+        background: #fff;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 0 5px var(--hijau-muda), 0 0 0 6px var(--garis);
+      }
+      .modal-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .modal-brand {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--teks-lembut);
+        margin-bottom: 6px;
+      }
+      .modal-judul {
+        margin: 0 0 6px;
+        font-size: 17px;
+      }
+      .modal-teks {
+        margin: 0;
+        font-size: 13px;
+        color: var(--teks-lembut);
+        line-height: 1.5;
+      }
+      .modal-tautan {
+        margin: 12px 0 0;
+        padding: 8px 12px;
+        background: var(--latar);
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--hijau);
+        word-break: break-all;
+      }
+      .modal-aksi {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .modal-aksi .btn {
+        flex: 1;
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+      .btn-isi-merah {
+        background: var(--merah);
+        border-color: var(--merah);
+        color: #fff;
+      }
+      .btn-isi-merah:hover {
+        background: #a8222a;
+        border-color: #a8222a;
+      }
+      .btn:focus-visible {
+        outline: 3px solid rgba(32, 90, 40, 0.35);
+        outline-offset: 2px;
+      }
+      .btn-isi-merah:focus-visible {
+        outline-color: rgba(199, 43, 50, 0.35);
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes naik {
+        from {
+          opacity: 0;
+          transform: translateY(12px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {{if .Info}}
+    <div id="toast" class="toast {{if eq .InfoTipe "hapus"}}hapus{{else}}sukses{{end}}" role="status">
+      <span class="toast-ikon" aria-hidden="true">
+        {{if eq .InfoTipe "hapus"}}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+          <path d="M10 11v6M14 11v6" />
+          <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+        </svg>
+        {{else}}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        {{end}}
+      </span>
+      <span class="toast-teks">{{.Info}}</span>
+      <button type="button" class="toast-x" aria-label="Tutup">×</button>
+    </div>
+    {{end}}
+
+    <header>
+      <div class="wrap">
+        <div class="navbar">
+          <div class="brand">
+            <div class="brand-logo">
+              <img
+                src="https://res.cloudinary.com/dvul7dq3b/image/upload/v1770688661/logo_1_hhnqy2.png"
+                alt="Logo PPNP"
+              />
+            </div>
+            PPNP · Pemendek Tautan
+          </div>
+          <nav><span>Sisdm PPNP</span></nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="kartu">
+        <div class="judul">
+          <div class="ikon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+          </div>
+          <div>
+            <h1>Pemendek Tautan</h1>
+            <p>Ubah tautan panjang menjadi tautan pendek yang mudah dibagikan</p>
+          </div>
+        </div>
+
+        <form method="POST" action="/">
+          <div class="baris">
+            <input
+              class="input-url"
+              id="url"
+              name="url"
+              type="url"
+              placeholder="https://..."
+              value="{{.Tujuan}}"
+              required
+            />
+            <button class="tombol" type="submit">Pendekkan</button>
+          </div>
+          <div class="baris" style="margin-top: 10px">
+            <div class="prefix">
+              <span>{{.Domain}}/</span>
+              <input
+                id="slug"
+                name="slug"
+                placeholder="nama tautan (opsional)"
+                value="{{.Slug}}"
+              />
+            </div>
+          </div>
+          <p class="petunjuk">Kosongkan nama tautan untuk membuat kode acak.</p>
+        </form>
+
+        {{if .Pesan}}
+        <div class="pesan gagal">{{.Pesan}}</div>
+        {{end}}
+      </div>
+
+      <div class="kartu">
+        <h2>Tautan Terbaru</h2>
+        {{range .Links}}
+        <div class="item">
+          <div class="label">Target URL</div>
+          <div class="isi">{{.Tujuan}}</div>
+
+          <div class="label">Link pendek</div>
+          <div class="pendek-baris">
+            <a class="pendek" href="{{.Pendek}}" target="_blank" rel="noopener">{{.Pendek}}</a>
+            <button
+              class="ikon-salin"
+              type="button"
+              title="Salin"
+              data-salin="{{.Pendek}}"
+              onclick="salin(this)"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="bawah">
+            <span>{{.Klik}} kunjungan · {{.Dibuat}}</span>
+            {{if .Bisa}}
+            <div class="aksi">
+              <button
+                class="btn"
+                type="button"
+                aria-expanded="false"
+                onclick="ganti(this)"
+              >
+                Ganti
+              </button>
+              <form
+                method="POST"
+                action="/hapus"
+                data-konfirmasi
+                data-tautan="{{.Pendek}}"
+              >
+                <input type="hidden" name="kode" value="{{.Kode}}" />
+                <button class="btn btn-merah" type="submit">Hapus</button>
+              </form>
+            </div>
+            {{end}}
+          </div>
+
+          {{if .Bisa}}
+          <form method="POST" action="/ganti" class="form-ganti" hidden>
+            <input type="hidden" name="kode" value="{{.Kode}}" />
+            <label>Nama tautan</label>
+            <div class="prefix">
+              <span>{{$.Domain}}/</span>
+              <input name="slug" value="{{.Kode}}" required />
+            </div>
+            <label>URL tujuan</label>
+            <input name="url" type="url" value="{{.Tujuan}}" required />
+            <button class="btn" type="submit">Simpan perubahan</button>
+          </form>
+          {{end}}
+        </div>
+        {{else}}
+        <p class="kosong">Belum ada tautan.</p>
+        {{end}}
+      </div>
+
+      <div class="footer">© 2026 SISDM PPNP · Pemendek Tautan</div>
+    </main>
+
+    <div id="modal" class="modal" hidden>
+      <div
+        class="modal-kotak"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="modal-judul"
+        aria-describedby="modal-teks"
+      >
+        <div class="modal-logo">
+          <img
+            src="https://res.cloudinary.com/dvul7dq3b/image/upload/v1770688661/logo_1_hhnqy2.png"
+            alt="Logo PPNP"
+          />
+        </div>
+        <div class="modal-brand">PPNP · Pemendek Tautan</div>
+        <h3 class="modal-judul" id="modal-judul">Hapus tautan ini?</h3>
+        <p class="modal-teks" id="modal-teks">
+          Tautan yang dihapus tidak bisa dikembalikan dan tidak bisa dibuka lagi.
+        </p>
+        <p class="modal-tautan" id="modal-tautan"></p>
+        <div class="modal-aksi">
+          <button type="button" class="btn" id="modal-batal">Batal</button>
+          <button type="button" class="btn btn-isi-merah" id="modal-ok">Ya, hapus</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function salin(btn) {
+        navigator.clipboard.writeText(btn.dataset.salin).then(function () {
+          btn.title = "Tersalin";
+          setTimeout(function () {
+            btn.title = "Salin";
+          }, 1500);
+        });
+      }
+
+      function ganti(btn) {
+        var form = btn.closest(".item").querySelector(".form-ganti");
+        var buka = form.hidden;
+        form.hidden = !buka;
+        btn.setAttribute("aria-expanded", buka ? "true" : "false");
+        btn.textContent = buka ? "Batal" : "Ganti";
+      }
+
+      (function () {
+        var modal = document.getElementById("modal");
+        var tautan = document.getElementById("modal-tautan");
+        var btnBatal = document.getElementById("modal-batal");
+        var btnOk = document.getElementById("modal-ok");
+        var formAktif = null;
+        var pemicu = null;
+
+        function buka(form) {
+          formAktif = form;
+          pemicu = document.activeElement;
+          var url = form.getAttribute("data-tautan") || "";
+          tautan.textContent = url;
+          tautan.hidden = !url;
+          modal.hidden = false;
+          btnBatal.focus();
+        }
+
+        function tutup() {
+          modal.hidden = true;
+          formAktif = null;
+          if (pemicu && pemicu.focus) pemicu.focus();
+        }
+
+        document.addEventListener("submit", function (e) {
+          var form = e.target;
+          if (!form.hasAttribute || !form.hasAttribute("data-konfirmasi")) return;
+          e.preventDefault();
+          buka(form);
+        });
+
+        btnOk.onclick = function () {
+          var form = formAktif;
+          modal.hidden = true;
+          if (form) form.submit();
+        };
+        btnBatal.onclick = tutup;
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) tutup();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (modal.hidden) return;
+          if (e.key === "Escape") {
+            tutup();
+          } else if (e.key === "Tab") {
+            // jaga fokus tetap di dalam dialog
+            e.preventDefault();
+            (document.activeElement === btnBatal ? btnOk : btnBatal).focus();
+          }
+        });
+      })();
+
+      (function () {
+        var t = document.getElementById("toast");
+        if (!t) return;
+        history.replaceState(null, "", "/");
+        function tutup() {
+          t.classList.add("keluar");
+          setTimeout(function () {
+            t.remove();
+          }, 300);
+        }
+        t.querySelector(".toast-x").onclick = tutup;
+        setTimeout(tutup, 10000);
+      })();
+    </script>
+  </body>
+</html>
